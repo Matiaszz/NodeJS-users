@@ -8,17 +8,22 @@ router.get('/users', async (req, res) => {
     try {
         const users = await prisma.user.findMany({ omit: { password: true } });
         res.status(200).json(users);
-        console.log(req.userId);
-        console.log(req.userName);
-        console.log(req.userEmail);
-
-
-
-
     } catch (err) {
         res.status(500).json({ message: "Internal server error on user listing." });
     }
 
+})
+
+router.get(`/user/:id`, async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await prisma.user.findUnique({ where: { id: userId }, omit: { password: true } })
+        return res.status(200).json(user);
+
+    } catch (err) {
+        res.status(500).json({ message: "Internal server error on user listing." });
+
+    }
 })
 
 export default router;
