@@ -1,4 +1,4 @@
 app/node_modules
 app/generated/prisma
-default.env
+docker.env
 app/.env
