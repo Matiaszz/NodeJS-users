@@ -1,0 +1,25 @@
+services:
+  dbUsersNode:
+    container_name: dbUsersNode
+    image: mysql:8
+    restart: always
+
+    env_file:
+      - .env
+    
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    
+    ports:
+      - "3306:3306"
+    volumes:
+      -  nodeUsersVolume:/var/lib/mysql
+    networks:
+      - nodeUsersNetwork
+
+volumes:
+  nodeUsersVolume:
+  
+networks:
+  nodeUsersNetwork:
